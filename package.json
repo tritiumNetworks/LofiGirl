@@ -5,7 +5,10 @@
   "repository": "https://github.com/TotalTemplates/discord.js-classbased.git",
   "license": "MIT",
   "dependencies": {
-    "discord.js": "^12.2.0"
+    "@lavacord/discord.js": "^0.0.7",
+    "discord.js": "^12.2.0",
+    "lavacord": "^1.1.9",
+    "superagent": "^6.1.0"
   },
   "devDependencies": {
     "eslint": "^7.3.1",

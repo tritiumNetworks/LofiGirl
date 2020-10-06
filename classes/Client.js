@@ -2,25 +2,26 @@ const { resolve: path } = require('path')
 const { Client } = require('discord.js')
 const { existsSync } = require('fs')
 const { readRecursively } = require('../utils/readFiles')
+const { Manager } = require('@lavacord/discord.js')
 
 class eClient extends Client {
   constructor () {
     super()
     this.tt = {}
 
-    this.tt.settingPath = path() + '/settings.json'
+    this.tt.settingPath = path() + '/config.json'
     this.tt.settingHas = existsSync(this.tt.settingPath)
 
     if (this.tt.settingHas) {
       const {
         token = process.env.TOKEN,
-        prefix = (process.env.PREFIX || '>'),
+        prefix = (process.env.PREFIX || 'lofi '),
         ...settings
       } = require(this.tt.settingPath)
 
       if (!token) throw new Error('Token not provided')
       this.settings = { token, prefix, ...settings }
-    } else throw new Error('./settings.json not exists')
+    } else throw new Error('./config.json not exists')
 
     this.tt.commandsPath = path() + '/commands'
     this.tt.commandsHas = existsSync(this.tt.commandsPath)
@@ -35,6 +36,9 @@ class eClient extends Client {
           this.commands.push(command)
         })
     } else throw new Error('./commands/ folder not exists')
+
+    this.lavalink = new Manager(this, [{ id: 'main', host: 'localhost', port: 2334, password: 'youshallnotpass' }])
+    this.on('ready', async () => await this.lavalink.connect())
   }
 
   start (token = this.settings.token) {
