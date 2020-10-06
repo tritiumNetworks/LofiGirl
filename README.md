@@ -17,12 +17,12 @@
 Click this, and create a repository with a cool name.
 
 ### 1. 저장소 클론 (CLONING THE REPOSITORY)
-```git clone <저장소 주소>```\
+```git clone https://github.com/<this is username>/LofiGirl```\
 로 저장소를 클론합니다\
 ~~(여기 말고 위에서 만든 저장소 말하는건데 이걸 클론해버리는 바보는 없겠지?)~~
 
 Use
-```git clone <Repository link>```\
+```git clone https://github.com/<this is username>/LofiGirl```\
 to clone the repository.
 ~~(Obviously, the repository u created, not this one. duh)~~
 
