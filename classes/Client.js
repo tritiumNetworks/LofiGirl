@@ -3,6 +3,7 @@ const { Client } = require('discord.js')
 const { existsSync } = require('fs')
 const { readRecursively } = require('../utils/readFiles')
 const { Manager } = require('@lavacord/discord.js')
+const knex = require('knex')
 
 class eClient extends Client {
   constructor () {
@@ -15,7 +16,7 @@ class eClient extends Client {
     if (this.tt.settingHas) {
       const {
         token = process.env.TOKEN,
-        prefix = (process.env.PREFIX || 'lofi '),
+        prefix = (process.env.PREFIX || 'lf>'),
         ...settings
       } = require(this.tt.settingPath)
 
@@ -37,6 +38,7 @@ class eClient extends Client {
         })
     } else throw new Error('./commands/ folder not exists')
 
+    this.db = knex({ client: 'mysql', connection: { host: 'localhost', port: 3306, user: 'lofigirl', database: 'lofigirl' } })
     this.lavalink = new Manager(this, [{ id: 'main', host: 'localhost', port: 2334, password: 'youshallnotpass' }])
     this.on('ready', async () => await this.lavalink.connect())
   }

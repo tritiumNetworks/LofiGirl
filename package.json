@@ -7,7 +7,9 @@
   "dependencies": {
     "@lavacord/discord.js": "^0.0.7",
     "discord.js": "^12.2.0",
+    "knex": "^0.21.6",
     "lavacord": "^1.1.9",
+    "mysql": "^2.18.1",
     "superagent": "^6.1.0"
   },
   "devDependencies": {
