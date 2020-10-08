@@ -6,4 +6,4 @@ function fn (client, msg) {
 
 module.exports = fn
 module.exports.aliases = ['ping', '핑', 'pong']
-module.exports.description = 'Check discord latency'
+module.exports.description = 'check discord latency'

@@ -15,8 +15,9 @@ async function onVoiceStateUpdate (client, old, state) {
     }
 
     if (old.channelID !== channel.id && state.channelID === channel.id) {
+      const { theme = 0 } = ((await client.db.select('theme').where('id', channel.id).from('channels'))[0] || {})
       const player = await client.lavalink.join({ guild: state.guild.id, channel: state.channelID, node: 'main' })
-      player.play(await getTrack(client.lavalink.nodes.get('main'), client.settings.url))
+      player.play(await getTrack(client.lavalink.nodes.get('main'), client.settings.urls[theme].url))
     }
   }
 }
