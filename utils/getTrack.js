@@ -13,9 +13,10 @@ async function getSongs (node, search) {
       await get('http://' + node.host + ':' + node.port + '/loadtracks?' + params)
         .set('Authorization', node.password)
 
-    cache[search] = res.body
-    return res.body
-  } else return cache[search]
+    cache[search] = res.body.tracks[0].track
+  }
+
+  return cache[search]
 }
 
 module.exports = getSongs
