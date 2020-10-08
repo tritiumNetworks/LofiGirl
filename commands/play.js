@@ -5,7 +5,7 @@ const getTrack = require('../utils/getTrack')
  * @param {import('discord.js').Message} msg
  */
 async function fn (client, msg) {
-  console.log(client.lavalink.players)
+  if (client.lavalink.players.get(msg.guild.id)) return msg.channel.send('I\'m already playing lofi')
   if (!msg.member.voice.channel) return msg.channel.send('you need to join a voice channel first')
   if (!msg.member.voice.channel.joinable || !msg.member.voice.channel.speakable) return msg.channel.send('sorry, i don\'t have any permissions to connect that channel')
 

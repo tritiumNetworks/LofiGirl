@@ -1,4 +1,5 @@
 const { MessageEmbed } = require('discord.js')
+const getTrack = require('../utils/getTrack')
 const emojis = ['1%E2%83%A3', '2%E2%83%A3', '3%E2%83%A3', '4%E2%83%A3', '5%E2%83%A3', '6%E2%83%A3', '7%E2%83%A3', '8%E2%83%A3', '9%E2%83%A3']
 
 /**
@@ -21,7 +22,16 @@ async function fn (client, msg) {
   if (!reactions.first()) return m.edit('selection timeout', { embed: null })
   m.reactions.removeAll().catch(() => {})
 
+  const theme = emojis.indexOf(reactions.first().emoji.identifier)
+
+  await client.db.update({ theme }).where('gid', msg.guild.id).from('channels')
   m.edit('you choose `' + urls[emojis.indexOf(reactions.first().emoji.identifier)].name + '` theme', { embed: null })
+
+  if (client.lavalink.players.get(msg.guild.id)) {
+    await client.lavalink.leave(msg.guild.id)
+    const player = await client.lavalink.join({ guild: msg.guild.id, channel: msg.guild.voice.channel.id, node: 'main' })
+    player.play(await getTrack(client.lavalink.nodes.get('main'), client.settings.urls[theme].url))
+  }
 }
 
 module.exports = fn
