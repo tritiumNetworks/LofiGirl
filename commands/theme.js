@@ -24,7 +24,7 @@ async function fn (client, msg) {
 
   const theme = emojis.indexOf(reactions.first().emoji.identifier)
 
-  await client.db.update({ theme }).where('gid', msg.guild.id).from('channels')
+  await client.db.update({ theme }).where('guild', msg.guild.id).from('channels')
   m.edit('you choose `' + urls[emojis.indexOf(reactions.first().emoji.identifier)].name + '` theme', { embed: null })
 
   if (client.lavalink.players.get(msg.guild.id)) {
