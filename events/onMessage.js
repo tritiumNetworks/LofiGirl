@@ -8,6 +8,7 @@ function onMessage (client, msg) {
   const { prefix } = client.settings
   const { author, content } = msg
 
+  if (!msg.guild) return msg.channel.send('sorry, lofigirl does not support direct messaging (DM)')
   if (author.bot) return
   if (!content.startsWith(prefix)) return
 
