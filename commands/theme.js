@@ -30,7 +30,7 @@ async function fn (client, msg) {
   if (client.lavalink.players.get(msg.guild.id)) {
     await client.lavalink.leave(msg.guild.id)
     const player = await client.lavalink.join({ guild: msg.guild.id, channel: msg.guild.voice.channel.id, node: 'main' })
-    player.play(await getTrack(client.lavalink.nodes.get('main'), client.settings.urls[theme].url))
+    player.play(await getTrack(client.lavalink.nodes.get('main'), client.settings.urls[theme].url)).catch(process.exit)
   }
 }
 

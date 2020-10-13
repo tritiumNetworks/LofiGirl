@@ -40,7 +40,7 @@ class eClient extends Client {
 
     this.db = knex({ client: 'mysql', connection: { host: 'localhost', port: 3306, user: 'lofigirl', database: 'lofigirl' } })
     this.lavalink = new Manager(this, [{ id: 'main', host: 'localhost', port: 2334, password: 'youshallnotpass' }])
-    this.on('ready', async () => await this.lavalink.connect())
+    this.on('ready', () => this.lavalink.connect().catch(process.exit))
   }
 
   start (token = this.settings.token) {
@@ -48,9 +48,7 @@ class eClient extends Client {
   }
 
   regist (event = 'ready', exec = () => {}) {
-    this.on(event, (...args) => {
-      exec(this, ...args)
-    })
+    this.on(event, (...args) => exec(this, ...args))
   }
 }
 
