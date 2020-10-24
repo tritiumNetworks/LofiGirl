@@ -8,7 +8,7 @@ const emojis = ['1%E2%83%A3', '2%E2%83%A3', '3%E2%83%A3', '4%E2%83%A3', '5%E2%83
  */
 async function fn (client, msg) {
   const { urls } = client.settings
-  const embed = new MessageEmbed({ title: 'there is ' + urls.length + ' theme(s)' })
+  const embed = new MessageEmbed({ title: 'there is/are ' + urls.length + ' theme(s)' })
   for (const index in urls) {
     embed.addField((Number(index) + 1) + '. ' + urls[index].name, '[' + urls[index].url + '](' + urls[index].url + ')')
   }
