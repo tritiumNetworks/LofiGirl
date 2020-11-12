@@ -22,7 +22,7 @@ async function onReady (client) {
     player.play(await getTrack(client.lavalink.nodes.get('main'), client.settings.urls[chn.theme || 0].url)).catch(process.exit)
   }
 
-  if (client.settings.koreanbots?.enable) {
+  if ((client.settings.koreanbots || {}).enable) {
     setInterval(async () => {
       await post(client.settings.koreanbots.baseURL + '/bots/servers')
         .set('token', client.settings.koreanbots.token)

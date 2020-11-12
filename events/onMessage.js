@@ -22,7 +22,7 @@ async function onMessage (client, msg) {
   )
 
   if (!target) return
-  if (client.settings.koreanbots?.enable) {
+  if ((client.settings.koreanbots || {}).enable) {
     if (!cache.includes(msg.author.id)) {
       const { status, body } =
         await get(client.settings.koreanbots.baseURL + '/bots/voted/' + msg.author.id)
