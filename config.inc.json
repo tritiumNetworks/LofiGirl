@@ -1,5 +1,20 @@
 {
   "token": "",
-  "target": "",
-  "url": "https://www.youtube.com/watch?v=5qap5aO4i9A"
+  "prefix": "lf>",
+  "urls": [
+    {
+      "name": "beats to relax/study to",
+      "url": "https://www.youtube.com/watch?v=5qap5aO4i9A"
+    },
+    {
+      "name": "beats to sleep/chill to",
+      "url": "https://www.youtube.com/watch?v=DWcJFNfaw9c"
+    }
+  ],
+  "koreanbots": {
+    "enable": false,
+    "token": "",
+    "baseURL": "https://api.koreanbots.dev",
+    "profileURL": "https://koreanbots.dev/bots/763033945767280650"
+  }
 }
