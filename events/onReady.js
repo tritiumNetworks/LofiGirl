@@ -15,9 +15,31 @@ async function onReady (client) {
   const channels = await client.db.select('*').from('channels')
   for (const chn of channels) {
     const channel = client.channels.resolve(chn.id)
+    if (!channel) continue
+
     const users = channel.members.array().filter((member) => !member.user.bot).length
 
-    if (users < 1) continue
+    if (users < 1) {
+      await client.lavalink.leave(channel.guild.id)
+      continue
+    }
+
+    const player = await client.lavalink.join({ guild: channel.guild.id, channel: channel.id, node: 'main' })
+    player.play(await getTrack(client.lavalink.nodes.get('main'), client.settings.urls[chn.theme || 0].url)).catch(process.exit)
+  }
+
+  const channels2 = client.channels.cache.array().filter((ch) => ch.type === 'voice' && ch.members.find((member) => member.user.id === client.user.id))
+  for (const chn of channels2) {
+    const channel = client.channels.resolve(chn.id)
+    if (!channel) continue
+
+    const users = channel.members.array().filter((member) => !member.user.bot).length
+
+    if (users < 1) {
+      await client.lavalink.leave(channel.guild.id)
+      continue
+    }
+
     const player = await client.lavalink.join({ guild: channel.guild.id, channel: channel.id, node: 'main' })
     player.play(await getTrack(client.lavalink.nodes.get('main'), client.settings.urls[chn.theme || 0].url)).catch(process.exit)
   }
