@@ -17,7 +17,7 @@ async function onReady (client) {
     const channel = client.channels.resolve(chn.id)
     const users = channel.members.array().filter((member) => !member.user.bot).length
 
-    if (users < 1) return
+    if (users < 1) continue
     const player = await client.lavalink.join({ guild: channel.guild.id, channel: channel.id, node: 'main' })
     player.play(await getTrack(client.lavalink.nodes.get('main'), client.settings.urls[chn.theme || 0].url)).catch(process.exit)
   }
