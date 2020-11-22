@@ -6,6 +6,10 @@ const getTrack = require('../utils/getTrack')
  * @param {import('discord.js').VoiceState} state
  */
 async function onVoiceStateUpdate (client, old, state) {
+  if (old.channel.members.filter((member) => !member.user.bot).size < 1) {
+    client.lavalink.leave(old.guild.id)
+  }
+
   const channels = await client.db.select('*').from('channels')
 
   for (const channel of channels) {
