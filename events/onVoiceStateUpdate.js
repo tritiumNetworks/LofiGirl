@@ -5,11 +5,7 @@ const getTrack = require('../utils/getTrack')
  * @param {import('discord.js').VoiceState} old
  * @param {import('discord.js').VoiceState} state
  */
-async function onVoiceStateUpdate (client, old, state) {
-  if (old.channel.members.filter((member) => !member.user.bot).size < 1) {
-    client.lavalink.leave(old.guild.id)
-  }
-
+async function onVoiceStateUpdate (client, old = { channelID: '' }, state) {
   const channels = await client.db.select('*').from('channels')
 
   for (const channel of channels) {
@@ -25,6 +21,11 @@ async function onVoiceStateUpdate (client, old, state) {
       const player = await client.lavalink.join({ guild: state.guild.id, channel: state.channelID, node: 'main' })
       player.play(await getTrack(client.lavalink.nodes.get('main'), client.settings.urls[theme].url)).catch(process.exit)
     }
+  }
+
+  if (!old.channel.members) return
+  if (old.channel.members.filter((member) => !member.user.bot).size < 1) {
+    client.lavalink.leave(old.guild.id)
   }
 }
 
