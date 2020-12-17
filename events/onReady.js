@@ -52,6 +52,17 @@ async function onReady (client) {
         .catch(console.log)
     }, 300000)
   }
+
+  if ((client.settings.uniquebots || {}).enable) {
+    setInterval(async () => {
+      await post(client.settings.uniquebots.baseURL + '/graphql')
+        .set('authorization', 'Bearer ' + client.settings.uniquebots.token)
+        .send({
+          query: 'query($guilds: Int!) {botAccount {guilds(patch: $guilds)}}',
+          variables: { guilds: client.guilds.cache.size }
+        }).catch(console.log)
+    }, 300000)
+  }
 }
 
 module.exports = onReady

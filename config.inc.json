@@ -16,5 +16,10 @@
     "token": "",
     "baseURL": "https://api.koreanbots.dev",
     "profileURL": "https://koreanbots.dev/bots/763033945767280650"
+  },
+  "uniquebots": {
+    "enable": false,
+    "token": "",
+    "baseURL": "https://api.uniquebots.kr"
   }
 }
