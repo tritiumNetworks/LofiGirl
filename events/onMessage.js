@@ -34,7 +34,7 @@ async function onMessage (client, msg) {
         cache.push(msg.author.id)
         target(client, msg)
       } else {
-        msg.channel.send('헤잉.. 죄송하지만 하트 버튼 하나만 딱 눌러주시면 안될까요...\n' + client.settings.koreanbots.profileURL)
+        msg.channel.send('헤잉.. 죄송하지만 하트 버튼 하나만 딱 눌러주시면 안될까요... (하트를 누르면 명령어 기능을 사용하실 수 있습니다)\n' + client.settings.koreanbots.profileURL)
       }
     } else target(client, msg)
   } else target(client, msg)

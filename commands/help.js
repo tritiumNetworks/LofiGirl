@@ -7,7 +7,7 @@ const { MessageEmbed } = require('discord.js')
 async function fn (client, msg) {
   let embed = new MessageEmbed({
     title: 'Lofi Girl',
-    description: 'a discord bot just playing ChilledCow\'s live stream'
+    description: 'a discord bot just playing ChilledCow\'s live stream\n- developed by `Dev. PMH#7086`'
   })
     .setImage('https://i.ytimg.com/vi/5qap5aO4i9A/maxresdefault.jpg')
     .setFooter('* illustration by Juan Pablo Machado (http://jpmachado.art)')
