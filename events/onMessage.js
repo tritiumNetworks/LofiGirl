@@ -27,7 +27,7 @@ async function onMessage (client, msg) {
       const { status, body } =
         await get(client.settings.koreanbots.baseURL + '/bots/voted/' + msg.author.id)
           .set('token', client.settings.koreanbots.token)
-          .catch(console.log)
+          .catch(() => { return {} })
 
       if (status !== 200) target(client, msg)
       else if (body.voted) {
