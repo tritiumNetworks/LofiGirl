@@ -14,9 +14,14 @@ async function fn (client, msg) {
   }
 
   const m = await msg.channel.send(embed)
-  for (const index in urls) {
-    await m.react(emojis[index])
+
+  async function createReaction () {
+    for (const index in urls) {
+      await m.react(emojis[index])
+    }
   }
+
+  createReaction()
 
   const reactions = await m.awaitReactions((r, u) => emojis.includes(r.emoji.identifier) && urls[emojis.indexOf(r.emoji.identifier)] && u.id === msg.author.id, { time: 10000, max: 1 })
   if (!reactions.first()) return m.edit('앗, 선택 시간이 지났어요', { embed: null })
