@@ -10,8 +10,8 @@ async function onMessage (client, msg) {
   const { prefix } = client.settings
   const { author, content } = msg
 
-  if (!msg.guild) return msg.channel.send('아앗.. DM은 안받아요ㅠ')
   if (author.bot) return
+  if (!msg.guild) return msg.channel.send('아앗.. DM은 안받아요ㅠ')
   if (!content.startsWith(prefix)) return
 
   const query = new Query(prefix, content)
